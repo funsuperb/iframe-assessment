@@ -38,6 +38,11 @@
                 iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
             };
         };
+        // Fix for iOS Safari password saving
+        document.addEventListener("touchend", function() {
+            let iframe = document.getElementById("appFrame");
+            iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
+        });
     </script>
 
 </body>
