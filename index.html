@@ -48,31 +48,6 @@
             let iframe = document.getElementById("appFrame");
             iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
         });
-
-        // 🔒 ป้องกันการกด F12, Ctrl+Shift+I, View Source และ Inspect Element
-        document.addEventListener("contextmenu", event => event.preventDefault());
-        document.addEventListener("keydown", function (event) {
-            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I") || (event.ctrlKey && event.key === "u")) {
-                event.preventDefault();
-            }
-        });
-
-        // 🔒 ป้องกันการเปิด DevTools ด้วย Mouse Right Click
-        document.addEventListener("mousedown", function (event) {
-            if (event.button === 2 || event.button === 1) { // คลิกขวา & คลิกกลาง
-                event.preventDefault();
-            }
-        });
-
-        // 🔄 ตรวจจับ DevTools เปิดอยู่หรือไม่ (Anti Debugging)
-        (function () {
-            const before = new Date().getTime();
-            debugger;
-            const after = new Date().getTime();
-            if (after - before > 100) {
-                document.body.innerHTML = "<h2>Error code 403–Forbidden!</h2>";
-            }
-        })();
     </script>
 
 </body>
