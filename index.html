@@ -39,13 +39,31 @@
 
         window.onload = function() {
             let iframe = document.getElementById("appFrame");
+
+            // ใช้ setInterval เพื่อส่ง message ซ้ำจนกว่า Safari จะทำงานถูกต้อง
+            let interval = setInterval(() => {
+                sendMessage();
+            }, 500);
+
+            // หยุด interval เมื่อ iframe โหลดสำเร็จ
             iframe.onload = function() {
-                setTimeout(sendMessage, 500);
+                setTimeout(() => {
+                    sendMessage();
+                    clearInterval(interval);
+                }, 500);
             };
+
+            // กระตุ้น Safari ให้แสดงหน้าต่างบันทึกรหัสผ่านเมื่อ iframe ได้ focus
+            iframe.addEventListener("focus", sendMessage);
         };
 
-        // iOS Safari fix for password saving
+        // iOS Safari Fix: ใช้ touchend เพื่อ trigger บันทึกรหัสผ่าน
         document.addEventListener("touchend", sendMessage);
+
+        // ใช้ requestAnimationFrame เพื่อให้ Safari เรนเดอร์เร็วขึ้น
+        requestAnimationFrame(() => {
+            sendMessage();
+        });
     </script>
 </body>
 </html>
