@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <title>ระบบประเมินการปฏิบัติงาน</title>
     <link rel="icon" type="image/x-icon" href="https://img5.pic.in.th/file/secure-sv1/sirindhorn-logo-png.png">
@@ -24,38 +23,23 @@
         }
     </style>
 </head>
-
 <body>
-    <iframe id="appFrame" src="https://script.google.com/macros/s/AKfycbxJ7vm1-nyIJan5mNKHvFQU8T2YiGVJo_sYjCxQJDB1ULrsqeSeaqr17TIumJG2A_o2/exec" allow="clipboard-write"></iframe>
-
+    <iframe id="appFrame" src="https://script.google.com/macros/s/AKfycbxJ7vm1-nyIJan5mNKHvFQU8T2YiGVJo_sYjCxQJDB1ULrsqeSeaqr17TIumJG2A_o2/exec"
+            allow="clipboard-write">
+    </iframe>
     <script>
         window.onload = function() {
             let iframe = document.getElementById("appFrame");
-            
             iframe.onload = function() {
-                // ส่งข้อความไปยัง iframe เพื่อให้แน่ใจว่ามีการเปิดใช้การจำรหัสผ่าน
                 iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
-
-                // จำลองการกรอกข้อมูลเพื่อกระตุ้นให้เบราว์เซอร์เสนอให้บันทึกรหัสผ่าน
-                setTimeout(() => {
-                    iframe.contentWindow.postMessage({ simulateFormFill: true }, "*");
-                }, 1000);
             };
         };
 
-        // Fix สำหรับ Safari iOS และ Chrome บนมือถือ
+        // Fix for iOS Safari password saving
         document.addEventListener("touchend", function() {
             let iframe = document.getElementById("appFrame");
             iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
         });
-
-        // ตรวจจับข้อความจาก iframe เพื่อให้แน่ใจว่ามีการบันทึกข้อมูล
-        window.addEventListener("message", function(event) {
-            if (event.data && event.data.formSubmitted) {
-                console.log("Form submitted inside iframe. Prompting password save.");
-            }
-        }, false);
     </script>
 </body>
-
 </html>
