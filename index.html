@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <title>ระบบประเมินการปฏิบัติงาน</title>
     <link rel="icon" type="image/png" href="https://img5.pic.in.th/file/secure-sv1/sirindhorn-logo-png.png">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Fix icon not displaying in iOS Safari -->
+    <link rel="apple-touch-icon" href="https://img5.pic.in.th/file/secure-sv1/sirindhorn-logo-png.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
     <style>
-        body,
-        html {
+        body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             width: 100%;
             overflow: hidden;
         }
-
         iframe {
             position: absolute;
             top: 0;
@@ -24,25 +29,53 @@
         }
     </style>
 </head>
+
 <body>
 
-    <iframe
+    <iframe id="appFrame" sandbox="allow-scripts allow-same-origin"
         src="https://script.google.com/macros/s/AKfycbxJ7vm1-nyIJan5mNKHvFQU8T2YiGVJo_sYjCxQJDB1ULrsqeSeaqr17TIumJG2A_o2/exec">
     </iframe>
 
     <script>
         window.onload = function () {
-            let iframe = document.querySelector("iframe");
+            let iframe = document.getElementById("appFrame");
             iframe.onload = function () {
                 iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
             };
         };
-        // Fix for iOS Safari password saving
-        document.addEventListener("touchend", function() {
+
+        document.addEventListener("touchend", function () {
             let iframe = document.getElementById("appFrame");
             iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
         });
+
+        // 🔒 ป้องกันการกด F12, Ctrl+Shift+I, View Source และ Inspect Element
+        document.addEventListener("contextmenu", event => event.preventDefault());
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "F12" || (event.ctrlKey && event.shiftKey && event.key === "I") || (event.ctrlKey && event.key === "u")) {
+                event.preventDefault();
+            }
+        });
+
+        // 🔒 ป้องกันการเปิด DevTools ด้วย Mouse Right Click
+        document.addEventListener("mousedown", function (event) {
+            if (event.button === 2 || event.button === 1) { // คลิกขวา & คลิกกลาง
+                event.preventDefault();
+            }
+        });
+
+        // 🔄 ตรวจจับ DevTools เปิดอยู่หรือไม่ (Anti Debugging)
+        (function () {
+            const before = new Date().getTime();
+            debugger;
+            const after = new Date().getTime();
+            if (after - before > 100) {
+                document.body.innerHTML = "<h2>Error code 403–Forbidden!</h2>";
+            }
+        })();
     </script>
 
 </body>
+
 </html>
+
