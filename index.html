@@ -3,11 +3,6 @@
 <head>
     <title>ระบบประเมินการปฏิบัติงาน</title>
     <link rel="icon" type="image/png" href="https://img5.pic.in.th/file/secure-sv1/sirindhorn-logo-png.png">
-<!--     แสดงในระบบ iOS -->
-    <link rel="apple-touch-icon" sizes="180x180" href="https://img5.pic.in.th/file/secure-sv1/sirindhorn-logo-png.png">
-<!--     แสดงในระบบ Andriod -->
-    <link rel="icon" type="image/png" sizes="192x192" href="https://img5.pic.in.th/file/secure-sv1/sirindhorn-logo-png.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="https://img5.pic.in.th/file/secure-sv1/sirindhorn-logo-png.png">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <style>
         body,
@@ -47,22 +42,6 @@
             let iframe = document.getElementById("appFrame");
             iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
         });
-
-        // script block view source code
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            alert('Error code 403–Forbidden!');
-        });
-        document.onkeydown = function(e) {
-            if (e.keyCode == 123 || // F12
-                (e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
-                (e.ctrlKey && e.shiftKey && e.keyCode === 74) || // Ctrl+Shift+J
-                (e.ctrlKey && e.keyCode === 85)) { // Ctrl+U
-                e.preventDefault();
-            alert('Error code 403–Forbidden!');
-        return false;
-        }
-    };
     </script>
 
 </body>
