@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html lang="th">
+<html>
 
 <head>
     <title>ระบบประเมินการปฏิบัติงาน</title>
-    <link rel="icon" type="image/png" href="https://img5.pic.in.th/file/secure-sv1/sirindhorn-logo-png.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Fix icon in iOS Safari -->
-    <link rel="apple-touch-icon" href="https://img5.pic.in.th/file/secure-sv1/sirindhorn-logo-png.png">
-    
+    <link rel="icon" type="image/x-icon" href="https://img5.pic.in.th/file/secure-sv1/sirindhorn-logo-png.png">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <style>
-        body, html {
+        body,
+        html {
             margin: 0;
             padding: 0;
             height: 100%;
             width: 100%;
             overflow: hidden;
         }
+
         iframe {
             position: absolute;
             top: 0;
@@ -26,25 +24,28 @@
         }
     </style>
 </head>
+
 <body>
 
-    <iframe id="appFrame" sandbox="allow-scripts allow-same-origin"
+    <iframe
         src="https://script.google.com/macros/s/AKfycbxJ7vm1-nyIJan5mNKHvFQU8T2YiGVJo_sYjCxQJDB1ULrsqeSeaqr17TIumJG2A_o2/exec">
     </iframe>
 
     <script>
         window.onload = function () {
-            let iframe = document.getElementById("appFrame");
+            let iframe = document.querySelector("iframe");
             iframe.onload = function () {
                 iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
             };
         };
-        // Fix for iOS password saving
-        document.addEventListener("touchend", function () {
+        
+        // Fix for iOS Safari password saving
+        document.addEventListener("touchend", function() {
             let iframe = document.getElementById("appFrame");
             iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
         });
     </script>
 
 </body>
+
 </html>
