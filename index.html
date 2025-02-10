@@ -24,28 +24,24 @@
     </style>
 </head>
 <body>
-    <iframe 
-        id="appFrame" 
-        src="https://script.google.com/macros/s/AKfycbxJ7vm1-nyIJan5mNKHvFQU8T2YiGVJo_sYjCxQJDB1ULrsqeSeaqr17TIumJG2A_o2/exec" 
-        allow="clipboard-write allow-same-origin allow-scripts">
+    <iframe
+        src="https://script.google.com/macros/s/AKfycbxJ7vm1-nyIJan5mNKHvFQU8T2YiGVJo_sYjCxQJDB1ULrsqeSeaqr17TIumJG2A_o2/exec">
     </iframe>
-    <script>
-        function sendMessage() {
-            let iframe = document.getElementById("appFrame");
-            if (iframe && iframe.contentWindow) {
-                iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
-            }
-        }
 
-        window.onload = function() {
-            let iframe = document.getElementById("appFrame");
-            iframe.onload = function() {
-                setTimeout(sendMessage, 100);
+
+    <script>
+        window.onload = function () {
+            let iframe = document.querySelector("iframe");
+            iframe.onload = function () {
+                iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
             };
         };
+        // Fix for iOS Safari password saving
+        document.addEventListener("touchend", function() {
+            let iframe = document.getElementById("appFrame");
+            iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
+        });
 
-        // iOS Safari fix for password saving
-        document.addEventListener("touchend", sendMessage);
     </script>
 </body>
 </html>
