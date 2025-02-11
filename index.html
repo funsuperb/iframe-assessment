@@ -23,22 +23,30 @@
     </style>
 </head>
 <body>
-    <iframe
-        src="https://script.google.com/macros/s/AKfycbxJ7vm1-nyIJan5mNKHvFQU8T2YiGVJo_sYjCxQJDB1ULrsqeSeaqr17TIumJG2A_o2/exec">
-    </iframe>
+    <iframe id="appFrame"
+    src="https://script.google.com/macros/s/AKfycbxJ7vm1-nyIJan5mNKHvFQU8T2YiGVJo_sYjCxQJDB1ULrsqeSeaqr17TIumJG2A_o2/exec"
+    sandbox="allow-scripts allow-forms"
+    referrerpolicy="no-referrer">
+</iframe>
 
-    <script>
-        window.onload = function () {
-            let iframe = document.querySelector("iframe");
-            iframe.onload = function () {
-                iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
-            };
+<script>
+    window.onload = function () {
+        let iframe = document.getElementById("appFrame");
+        iframe.onload = function () {
+            iframe.contentWindow.postMessage(
+                { enableRememberMe: true },
+                "https://script.googleusercontent.com"  // ใส่ Origin ที่ถูกต้องจาก Console
+            );
         };
-        // Fix for iOS Safari password saving
-        document.addEventListener("touchend", function() {
-            let iframe = document.getElementById("appFrame");
-            iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
-        });
-    </script>
+    };
+
+    document.addEventListener("touchend", function() {
+        let iframe = document.getElementById("appFrame");
+        iframe.contentWindow.postMessage(
+            { enableRememberMe: true },
+            "https://script.googleusercontent.com"  // ใส่ Origin ที่ถูกต้อง
+        );
+    });
+</script>
 </body>
 </html>
