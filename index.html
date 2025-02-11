@@ -3,6 +3,8 @@
     <title>ระบบประเมินการปฏิบัติงาน</title>
     <link rel="icon" type="image/x-icon" href="https://img5.pic.in.th/file/secure-sv1/sirindhorn-logo-png.png">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!-- เพิ่ม meta tag สำหรับ iOS autofill -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <style>
         body,
         html {
@@ -12,7 +14,6 @@
             width: 100%;
             overflow: hidden;
         }
-
         iframe {
             position: absolute;
             top: 0;
@@ -25,10 +26,13 @@
 </head>
 <body>
     <iframe
-        src="https://script.google.com/macros/s/AKfycbxJ7vm1-nyIJan5mNKHvFQU8T2YiGVJo_sYjCxQJDB1ULrsqeSeaqr17TIumJG2A_o2/exec">
+        src="https://script.google.com/macros/s/AKfycbxJ7vm1-nyIJan5mNKHvFQU8T2YiGVJo_sYjCxQJDB1ULrsqeSeaqr17TIumJG2A_o2/exec"
+        id="appFrame"
+        allow="autoplay; camera; microphone; credentialless; fullscreen; payment"
+        sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-modals allow-top-navigation"
+        webkit-playsinline="true"
+        playsinline="true">
     </iframe>
-
-
     <script>
         window.onload = function () {
             let iframe = document.querySelector("iframe");
@@ -36,12 +40,10 @@
                 iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
             };
         };
-        // Fix for iOS Safari password saving
         document.addEventListener("touchend", function() {
             let iframe = document.getElementById("appFrame");
             iframe.contentWindow.postMessage({ enableRememberMe: true }, "*");
         });
-
     </script>
 </body>
 </html>
